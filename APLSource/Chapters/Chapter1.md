@@ -265,7 +265,7 @@ to the data on the right.
 ## Boolean Values and Functions
 
 In APL Boolean values, true and false, are represented by the numbers
-1 and 0.  The relational functions < ≤ = ≥ > all return Boolean values:
+1 and 0.  The scalar relational functions < ≤ = ≥ > all return Boolean values:
 
 ~~~
       5>3
@@ -287,8 +287,58 @@ are greater than 100:
 3
 ~~~
 
-The boolean functions all take boolean values as arguments and return
-boolean values as results. the 
+The scalar boolean functions all take boolean values as arguments and return
+boolean values as results. 'Logical and'  and 'logical or' are the two
+primary boolean functions:
+
+~~~
+      1∧0 
+0
+      1∨0
+1
+~~~
+
+These functions are also supremely useful with the reduce operator.
+And reduction answers the question are all items true, while or reduction
+answers the questions are any items true:
+
+~~~
+      ∧/1 0 1 0
+0
+      ∨/1 0 1 0
+1
+      ∧/1 1 1 1
+1
+~~~
+
+## Variables and Assignment
+
+Arrays may be named by using the assignment arrow:
+
+~~~
+Greeting←'Hello world!'
+         Greeting
+Hello world!
+         Ages←16 15 18 11 15 16 17 19 
+         Ages
+16 15 18 11 15 16 17 19 
+~~~
+
+These names are referred to as variables. The system command )vars
+displays the variables in the session:
+
+~~~
+     )vars
+Ages     Greeting   
+~~~
+
+Variables may be used as arguments to functions, and to save the result
+of an expression for later use:
+
+      AverageAge←(+/Ages)÷⍴Ages
+      AverageAge
+15.875
+
 
 
 
