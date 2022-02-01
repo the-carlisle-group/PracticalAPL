@@ -1,6 +1,6 @@
-# Chapter 1
+# Chapter 1 - Introduction to Arrays and Functions
 
-## Introduction to Arrays and Functions
+## The Basics
 
 Let's add two numbers in APL using the `plus` function: 
 
