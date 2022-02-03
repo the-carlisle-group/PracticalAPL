@@ -2,22 +2,22 @@
 
 ## The Basics
 
-Let's add two numbers in APL using the `plus` function: 
+Let's add two numbers in using the ***plus*** function: 
 
 ~~~
       2+3
 5
 ~~~
 
-A single number like 2, 3 or 5 above, is a called a `scalar`.
-In APL we can also add lists of numbers:
+A single number like 2, 3 or 5 above, is a called a **scalar**.
+We can also add lists of numbers:
 
 ~~~
       1 2 3+3 4 6   
 4 6 9
 ~~~
 
-A list of numbers is called a `vector`. 
+A list of numbers is called a **vector**. 
 If we try to add two vectors of different lengths together,
 we get an error:
 
@@ -33,7 +33,7 @@ However, we may add a scalar to a vector:
 11 12 13
 ~~~
 
-This feature is called **scalar extension**. APl *extends* the scalar
+This feature is called **scalar extension**. APL extends the scalar
 to match the length of the vector, and effectively does:
 
 ~~~
@@ -67,11 +67,11 @@ Similarly for `minus` and for division:
 Note that scalar extension works on either side of the function. 
 
 These four functions, `+ - × ÷`, are classified as **scalar functions**.
-Scalar functions are applied between the corresponding numbers on each
+Scalar functions are applied between the corresponding elements on each
 side of the function, and support scalar extention.
 APL has many more scalar functions, each represented by a single symbol (or "glyph").
-Two additional scalar functions are maximum (upstile symbol: `⌈`)
-and minimum (downstile symbol `⌊`):
+Two additional scalar functions are ***maximum*** (upstile symbol: `⌈`)
+and ***minimum*** (downstile symbol `⌊`):
 
 ~~~
      11 0 10 7⌈9
@@ -99,20 +99,23 @@ while the monadic form of upstile is called ceiling and rounds up to the nearest
 ## Order of Operations
 
 In APL, all functions are created equal, none has higher precedence than another. 
-There is one simple rule, evaluation is from right to left: 
-      
+There is one simple rule, evaluation is from right to left:
+
+~~~
       4×2+1
 12    
+~~~
 
 In this expression, the plus funcion is evaluated first, producing 3, which is then 
 multiplied by 4 to produce 12. Another way of reading the expression is 4 
 times everything to right, which is 2 plus everything to the right.
  
 Parenthese may be used to override the normal order of evaluation:
-       
-      (4×2)+1
 
+~~~
+      (4×2)+1
 9
+~~~
 
 In APL, we try to avoid the use of parenthesis if possible. This is often
 possible by simply rearranging the order of the functions in an expression. 
@@ -120,7 +123,7 @@ possible by simply rearranging the order of the functions in an expression.
 
 ## Negative Numbers
 
-Negative numbers are represented by a **high minus** sign:
+Negative numbers are represented by a high minus sign:
 
 ~~~
       6-10
@@ -129,7 +132,7 @@ Negative numbers are represented by a **high minus** sign:
 
 The high minus may be thought of as phyically attached to the number,
 and is separate and distinct from the minus function.
-The minus sign's monadic form is **negate**, and it flips the sign of the number:
+The minus sign's monadic form is ***negate***, and it flips the sign of the number:
 
 ~~~
       -4
@@ -146,12 +149,11 @@ In the first case the monadic function negate is applied to the number 4, yieldi
 In the second case negate is applied to the result of 4 minus 10. In the third case, negative
 2 is subtracted from 4, and in the forth case, 10 is subtracted from negative 4.
 
- 
 ## Structural Functions
 
 APL has other functions that are not scalar, and are referred to as structural.
-The Greek letter iota (`⍳`), in its monadic form, is the index generator function, and the Greek letter
-rho (`⍴`) is the **shape** function:  
+The Greek letter iota (`⍳`), in its monadic form, is the index ***generator function***, and the Greek letter
+rho (`⍴`) is the ***shape*** function:  
 
 ~~~
      ⍳5
@@ -160,7 +162,7 @@ rho (`⍴`) is the **shape** function:
 3
 ~~~
 
-The dyadic form of iota is `index of`, which looks up the items of the right argument in the left argument
+The dyadic form of iota is ***index of***, which looks up the items of the right argument in the left argument
 and returns their location:
 
 ~~~
@@ -168,7 +170,7 @@ and returns their location:
 3 1 6
 ~~~
 
-The dyadic form of rho is `reshape`, which reshapes the right argument according to the left argument:
+The dyadic form of rho is ***reshape***, which reshapes the right argument according to the left argument:
 
 ~~~
       5⍴1 
@@ -219,7 +221,7 @@ but APL knows only about arrays of characters.
 
 ## Operators
 
-**Operators** are functions that take functions as arguments,
+APL **operators** are functions that take functions as arguments,
 and return new functions. Consider adding up all the numbers
 from 1 to 5. We could write:
 
@@ -228,18 +230,17 @@ from 1 to 5. We could write:
 15
 ~~~
 
-The reduce operator (the slash symbol /) takes a function
+The  ***reduce*** operator (the slash symbol `/`) takes a function
 and inserts it between each element which is exactly what we
 did manually above:
-  
+
 ~~~
       +/1 2 3 4 5
-  
 15
 ~~~
 
-In this case, the reduce operator takes the plus function as
-its **left operand** and returns a new function (+/) that we
+In this case, ***reduce*** takes the ***plus*** function as
+its **left operand** and returns a new function `+/` that we
 might call "sum". Thus to sum up the numbers from 1 to 1000:
 
 ~~~
@@ -262,10 +263,39 @@ An operator looks to its left for a function,
 and then takes that function and applies it in some special way
 to the data on the right.
 
+The order of operations is important when reduce
+is used with a function that is not transitive:
+
+~~~
+     -/⍳5
+3
+~~~
+
+This reduction is equivalent to:
+
+~~~
+     1-2-3-4-5
+3
+~~~
+
+which is in turn, if we add redundant parentheses, is equal to:
+
+~~~
+      1-(2-(3-(4-5)))
+3
+~~~
+
+which is not equal to:
+
+~~~
+      ((((1-2)-3)-4)-5)
+¯13
+~~~
+
 ## Boolean Values and Functions
 
 In APL Boolean values, true and false, are represented by the numbers
-1 and 0.  The scalar relational functions < ≤ = ≥ > all return Boolean values:
+1 and 0.  The scalar relational functions `< ≤ = ≥ >` all return Boolean values:
 
 ~~~
       5>3
@@ -278,7 +308,7 @@ In APL Boolean values, true and false, are represented by the numbers
 0 0 1 1 0 0 0 0 0 1 0
 ~~~
 
-Because Booleans are just the values 1 and 0, we can apply arithmetic
+Because Booleans are just the numeric values 1 and 0, we can apply arithmetic
 functions to them. Consider the question of how many values in a vector
 are greater than 100:
 
@@ -288,7 +318,7 @@ are greater than 100:
 ~~~
 
 The scalar boolean functions all take boolean values as arguments and return
-boolean values as results. 'Logical and'  and 'logical or' are the two
+boolean values as results. ***Logical and***  and ***logical or*** are the two
 primary boolean functions:
 
 ~~~
@@ -299,8 +329,8 @@ primary boolean functions:
 ~~~
 
 These functions are also supremely useful with the reduce operator.
-And reduction answers the question are all items true, while or reduction
-answers the questions are any items true:
+***And reduction*** answers the question are ***all*** items true, while ***or reduction***
+answers the questions are ***any*** items true:
 
 ~~~
       ∧/1 0 1 0
@@ -324,7 +354,7 @@ Hello world!
 16 15 18 11 15 16 17 19 
 ~~~
 
-These names are referred to as variables. The system command )vars
+These names are referred to as variables. The system command `)vars`
 displays the variables in the session:
 
 ~~~
@@ -345,19 +375,20 @@ of an expression for later use:
 
 So far all of the functions introduced have been single symbols. These
 are built in to the APL interpreter. They are known as built-in functions or
-primitive functions. We can also write our own functions, which will generally
+**primitive** functions. We can also write our own functions, which will generally
 call various primitive functions or other user defined functions. Here is 
-a function that adds it's left argument to twice its right argument: 
+a function that adds it's left argument to twice its right argument:
 
 ~~~
       1 2 3{⍺+2×⍵}10
 21 22 23
 ~~~
 
-Functions are delimited by braces. The right argument of function is Greek letter omega,
-and the left argument it the Greek letter alpha. A function may refer to alpha and omega in any
-order, as many times as neccessary, even 0 times:
+Functions are delimited by braces. The right argument of function is the Greek letter **omega**,
+and the left argument it the Greek letter **alpha**. A function may refer to alpha and omega in any
+order, as many times as neccessary, or not at all:
 
+~~~
       {⍵ ⍵ ⍵}5
 5 5 5
       2{⍵ ⍵ ⍵ ⍺ ⍺}5
@@ -365,19 +396,22 @@ order, as many times as neccessary, even 0 times:
       2{9}0
 9
 
-By definition, if a function does not include a reference to alpha, it is a mondadic function.
+~~~
+
+By definition, if a function does not include a reference to alpha, it is a monadic function.
 A function without alpha will not complain if you give it a left argument, it will just not use
-it for anything. However, you must pass a right argument to a function whether it refers to omega
+it for anything, and the same goes for omega. However, you must pass a right argument to a function whether it refers to omega
 or not. 
 
-The AverageAge expression above may be converted to a function:
+The `AverageAge` expression above may be converted to a function by simply surround it with braces
+and replacing the referencs to Ages with omega:
 
 ~~~
       {(+/⍵)÷⍴⍵}Ages
 15.875
 ~~~
 
-These user defined functions are anonymous. They have no name. However we can give a name to a function
+These user defined functions are anonymous; they have no name. However we can give a name to a function
 just like we can give a name to an array:
 
 ~~~
@@ -388,9 +422,10 @@ just like we can give a name to an array:
 15.875
 ~~~
 
-The system command )fns displays the named functions in the session:
+The system command `)fns` displays the named functions in the session:
 
 ~~~
       )fns
 Average 
 ~~~
+

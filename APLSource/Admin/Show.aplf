@@ -1,0 +1,5 @@
+ Show←{
+     d←Build 0
+     d.Caption←'Practical APL'
+     A.NewForm d
+ }

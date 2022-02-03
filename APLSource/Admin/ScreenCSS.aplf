@@ -1,0 +1,38 @@
+ ScreenCSS←{
+     Rule←A.NewRule
+     s←⍬
+     ⍝ *************************
+     s,←r←Rule'body'
+     r.max_width←'50rem'
+
+     ⍝ *******************
+     s,←r←Rule'h1'
+     r.margin←'1rem 0 .25rem 0'
+     r.font_weight←'bold'
+     r.font_family←'Arial'
+     r.font_size←'2rem'
+     r.font_weight←'bold'
+     ⍝ ****************
+     s,←r←Rule'h2'
+     r.font_weight←'bold'
+     r.font_family←'Arial'
+     r.font_size←'1.25rem'
+     r.margin←'1rem 0 .15rem 0'
+     ⍝ *********************
+     s,←r←Rule'p'
+     r.margin←'0 0 .75rem 0'
+     ⍝ *****************
+     s,←r←Rule'code'
+     r.font_family←'APL385 Unicode'
+     ⍝ ****************
+     s,←r←Rule'pre'
+     r.margin←0
+     r.whitespace←'pre'
+     r.padding←0
+     ⍝ ****************
+     s,←r←Rule'pre>code'
+     r.display←'block'
+     ⍝ r.background_color←'LightGray'
+     r.padding←'.5rem 2rem'
+     s
+ }

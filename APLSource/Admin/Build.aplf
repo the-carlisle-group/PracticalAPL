@@ -1,0 +1,7 @@
+ Build←{
+     d←A.NewDocument''
+     b←A.GetBody d
+     b.Content←A.MD2DOM ##.Chapters.Chapter1
+     d.Style←ScreenCSS 0
+     d
+ }
