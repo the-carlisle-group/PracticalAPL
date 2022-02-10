@@ -55,7 +55,7 @@ Just like the the plus function, it too works on vectors:
 6 8 10
 ~~~
 
-Similarly for `minus` and for division:
+Similarly for ***minus*** and for ***divide***:
 
 ~~~
       2 4 6-1
@@ -117,7 +117,7 @@ Parenthese may be used to override the normal order of evaluation:
 9
 ~~~
 
-In APL, we try to avoid the use of parenthesis if possible. This is often
+APL programmers try to avoid the use of parenthesis. This is often
 possible by simply rearranging the order of the functions in an expression. 
 
 
@@ -151,7 +151,7 @@ In the second case negate is applied to the result of 4 minus 10. In the third c
 
 ## Structural Functions
 
-APL has other functions that are not scalar, and are referred to as structural.
+APL has other functions that are not scalar, and are referred to as **structural**.
 The Greek letter iota (`⍳`), in its monadic form, is the index ***generator function***, and the Greek letter
 rho (`⍴`) is the ***shape*** function:  
 

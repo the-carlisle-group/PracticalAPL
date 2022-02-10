@@ -32,7 +32,10 @@
      ⍝ ****************
      s,←r←Rule'pre>code'
      r.display←'block'
-     ⍝ r.background_color←'LightGray'
      r.padding←'.5rem 2rem'
+     ⍝ *****************
+     s,←#.Abacus.CSS.Table 0
+
+
      s
  }
