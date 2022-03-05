@@ -1,17 +1,62 @@
-# Chapter 2 - Arrays in Depth
+# Chapter 2 - Exercises
 
-(Should cover nested, rank shape depth, tally vs rho, the each operator, enclose, enclose if simple. 
+1. Write a function that returns the integers from `⍺` to `⍵` inclusive of the end points:
 
-match, not match
+~~~
+      5{your code here}10
+5 6 7 8 9 10
+~~~
 
-## intro to catenate, take and drop here
+Once you have your function working, give it a name so we can talk about, and so it is easy
+to use over and over again:
+
+~~~
+     to←{your code here}
+~~~
+
+What kind of function did you write? Is it a scalar function? Or a structural function? How would
+we call the function if we wanted to generate integers from 5 to 10 and also from 8 to 21?  
 
 
+2. Write a function that converts Celsius to Fahrenheit:
 
-## Nested Arrays (mix and split)
+~~~
+      {your code here}0
+32
+      {your code here}100
+212
+~~~
 
-## Shape Rank and Depth
+Give this function a name:
 
-## Enclose, etc.
+~~~
+     C2F←{your code here}
+~~~
 
-Mix and Split
+What kind of function is `C2F`? Is it a scalar function? Or a structural function? How would
+you apply it to a vector or matrix of Fahrenheit values? 
+
+3. Using the above two functions `to` and `C2F`, write a new function that converts a range of
+integer Celsius values from `⍺` to `⍵` to the corresponding Fahrenheit values:    
+
+~~~
+      C2FRange←{your function here}
+      20 C2FRange 25
+68 69.8 71.6 73.4 75.2 77
+~~~
+
+4. Write a function that that takes the same arguments as `C2FRange` above,
+but produces a matrix of Celsius and Fahrenheit values:
+
+~~~
+      C2FRangeMat←{your function here}
+      20 C2FRangeMat 25
+20 68  
+21 69.8
+22 71.6
+23 73.4
+24 75.2
+25 77  
+~~~
+
+5. Why is Fahrenheit a better temperature scale than Celsius?

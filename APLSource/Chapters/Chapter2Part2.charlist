@@ -1,0 +1,222 @@
+# Chapter 2: Arrays in Depth - Part 2
+
+## Match
+
+(To be added later)
+
+## Catenate and Ravel
+
+So far, we have created simple and nested arrays by juxtapostion:
+
+~~~
+      2 7 1 8 2 8
+2 7 1 8 2 8
+      (1 2 3) (4 5 6 7)
+┌─────┬───────┐
+│1 2 3│4 5 6 7│
+└─────┴───────┘
+      'One' 'Two' 'Three'
+┌───┬───┬─────┐
+│One│Two│Three│
+└───┴───┴─────┘ 
+       m1←2 3⍴⍳6
+       m2←2 2⍴'abcd'
+       m1 m2
+┌─────┬──┐
+│1 2 3│ab│
+│4 5 6│cd│
+└─────┴──┘
+~~~
+
+That is, we have simply placed arrays
+next to each other and they are bound together to form a larger
+and deeper array. The `catenate` function (dyadic comma `,`)
+joins two arrays without increasing the depth:
+
+~~~
+      (1 2 3),(4 5 6 7)
+1 2 3 4 5 6 7
+      'One','Two','Three'
+OneTwoThree
+      m1,m2
+1 2 3 ab
+4 5 6 cd 
+~~~
+
+Monadic comma is the function `ravel`. It takes its argument
+and returns a vector of its elements:
+
+~~~
+     ,m1
+1 2 3 4 5 6
+     ,m2
+abcd
+~~~
+
+In this particular case, ravel is like the inverse of `reshape`.
+By definition, when applied to a vector, `ravel` returns
+its argument unchanged:
+
+~~~
+      ,'One'
+One
+      ,1 2 3 4
+1 2 3 4
+~~~
+
+When applied to a scalar, `ravel` returns a 1-item vector:
+
+~~~
+     5
+5
+    ,5
+5 
+~~~
+
+These look alike in the session, but one is a scalar and the 
+other is a one item vector. The `]Display` user command uses
+an extra level of boxes (over ]Box on), and some additional
+decoration, that makes clear the difference between
+a scalar and a 1-item vector:
+
+~~~
+      ]display 5
+ 
+5
+ 
+      ]display ,5
+┌→┐
+│5│
+└~┘
+~~~
+
+Note the difference between justaposing and catenating
+scalars versus 1-item vectors:
+
+~~~
+      s←3
+      v←,5
+      ]display s s s
+┌→────┐
+│3 3 3│
+└~────┘
+      ]display v v v
+┌→────────────┐
+│ ┌→┐ ┌→┐ ┌→┐ │
+│ │5│ │5│ │5│ │
+│ └~┘ └~┘ └~┘ │
+└∊────────────┘
+      ]display s v s
+┌→────────┐
+│   ┌→┐   │
+│ 3 │5│ 3 │
+│   └~┘   │
+└∊────────┘
+      ]display s,v,s
+┌→────┐
+│3 5 3│
+└~────┘
+~~~
+
+## Enclose and Disclose
+
+(To be added later)
+
+
+## Exercises
+
+Create three variables as follows:
+
+~~~
+       First←'Edgar'
+       Middle←'Allan'
+       Last←'Poe'
+~~~
+
+In each of the challenges below, write an expression using
+the three variables to produce the requested result.
+The results are displayed using the `]display` user command,
+so make sure you use that to check your answer.
+
+> Remember that when the instructions are to write an "expression"
+> you do not need to use a function with `{...}` and `⍺` and `⍵` (although you may).
+> You may just operate on the variable names themselves.
+
+1. Write an expression using the three variables that yields a simple vector of the 
+full name separated by spaces. The result should `]display` 
+as follows:
+
+~~~
+┌→──────────────┐
+│Edgar Allan Poe│
+└───────────────┘ 
+~~~
+
+2. Write an expression that returns a matrix with the three
+names shown vertically, in columns rather than rows:
+
+~~~
+┌→──┐
+↓EAP│
+│dlo│
+│gle│
+│aa │
+│rn │
+└───┘  
+~~~
+
+3. Write an expression that returns a matrix of names backwards
+right aligned:
+
+~~~
+┌→────┐
+↓ragdE│
+│nallA│
+│  eoP│
+└─────┘
+~~~
+
+4. Write an expression that returns a matrix of names right
+aligned (Hint: Sometimes we want to operate on each item 
+of an array with a structural function}:
+
+~~~
+┌→────┐
+↓Edgar│
+│Allan│
+│  Poe│
+└─────┘
+~~~
+
+5. Write an expression that produces:
+
+~~~
+┌→──────────────────────────┐
+│ ┌→──┐ ┌→────────────────┐ │
+│ │Poe│ │ ┌→────┐ ┌→────┐ │ │
+│ └───┘ │ │Edgar│ │Allan│ │ │
+│       │ └─────┘ └─────┘ │ │
+│       └∊────────────────┘ │
+└∊──────────────────────────┘ 
+~~~
+
+6. Write an expression that produces:
+
+~~~
+┌→──────────────┐
+│ ┌→──┐ ┌→────┐ │
+│ │Poe│ ↓Edgar│ │
+│ └───┘ │Allan│ │
+│       └─────┘ │
+└∊──────────────┘
+~~~
+
+7. Write an expression that produces:
+
+~~~
+┌→────────────────────┐
+│ ┌→──┐ ┌→──────────┐ │
+│ │Poe│ │Edgar-Allan│ │
+│ └───┘ └───────────┘ │
+└∊────────────────────┘
+~~~
