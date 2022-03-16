@@ -2,7 +2,30 @@
 
 ## Match
 
-(To be added later)
+The `match` function, dyadic `≡`, compares two arrays for equality.
+While the equals function (`=`) is a scalar function that compares simple scalars
+`match` is a structural function that compares whole arrays:
+
+~~~
+      'Ram' = 'Car'
+0 1 0
+      'Ram' ≡ 'Car'
+0
+      'Ram'='Ford'
+LENGTH ERROR: Mismatched left and right argument shapes
+      'Ram'='Ford'
+           ∧
+      'Ram'≡'Ford'
+0
+      'a'='Ram'
+0 1 0
+      'a'≡'Ram'
+0
+~~~
+
+The equals function, like all scalar functions requires conforming array arguments, supports
+scalar extention, and returns a result that is the same structure as its argument.
+The match function will never give an error, and always produces a scalar 1 or 0 as a result.
 
 ## Catenate and Ravel
 
@@ -31,7 +54,7 @@ So far, we have created simple and nested arrays by juxtapostion:
 That is, we have simply placed arrays
 next to each other and they are bound together to form a larger
 and deeper array. The `catenate` function (dyadic comma `,`)
-joins two arrays without increasing the depth:
+joins two arrays without (generally) increasing the depth:
 
 ~~~
       (1 2 3),(4 5 6 7)
@@ -42,6 +65,11 @@ OneTwoThree
 1 2 3 ab
 4 5 6 cd 
 ~~~
+
+Thus juxtapostion (almost) always increases depth, while catenation does not. 
+The only exception to this rule are simple scalars.
+If simple scalars are joined by catenation, the depth is increased. 
+
 
 Monadic comma is the function `ravel`. It takes its argument
 and returns a vector of its elements:
@@ -113,110 +141,214 @@ scalars versus 1-item vectors:
 │   └~┘   │
 └∊────────┘
       ]display s,v,s
-┌→────┐
+┌→────┐                                         a
 │3 5 3│
 └~────┘
 ~~~
 
 ## Enclose and Disclose
 
-(To be added later)
-
-
-## Exercises
-
-Create three variables as follows:
+We have seen how mere juxtapostion creates depth indirecty. The enclose function (left shoe, `⊂`)
+explicitly adds a level of depth to its argument:
 
 ~~~
-       First←'Edgar'
-       Middle←'Allan'
-       Last←'Poe'
+      Greeting←'Hello world!'
+      Greeting
+Hello world!
+      ⊂Greeting
+┌────────────┐
+│Hello world!│
+└────────────┘
+      (≢Greeting) (≡Greeting)
+12 1
+      (≢⊂Greeting) (≡⊂Greeting)
+1 2
 ~~~
 
-In each of the challenges below, write an expression using
-the three variables to produce the requested result.
-The results are displayed using the `]display` user command,
-so make sure you use that to check your answer.
-
-> Remember that when the instructions are to write an "expression"
-> you do not need to use a function with `{...}` and `⍺` and `⍵` (although you may).
-> You may just operate on the variable names themselves.
-
-1. Write an expression using the three variables that yields a simple vector of the 
-full name separated by spaces. The result should `]display` 
-as follows:
+In this case, `enclose` take a list of 12 things and returns 1, deeper thing. Enclose will 
+add a level of depth to an any item, even a nested scalar, so we may enclose multiple times:
 
 ~~~
-┌→──────────────┐
-│Edgar Allan Poe│
-└───────────────┘ 
+      ⊂⊂⍳10
+┌──────────────────────┐
+│┌────────────────────┐│
+││1 2 3 4 5 6 7 8 9 10││
+│└────────────────────┘│
+└──────────────────────┘
 ~~~
 
-2. Write an expression that returns a matrix with the three
-names shown vertically, in columns rather than rows:
+Note however that `enclose` has no effect on a simple scalar:
 
 ~~~
-┌→──┐
-↓EAP│
-│dlo│
-│gle│
-│aa │
-│rn │
-└───┘  
+      5
+5
+      ⊂5
+5
+      5≡⊂5
+1
 ~~~
 
-3. Write an expression that returns a matrix of names backwards
-right aligned:
+
+To see the usefulness of `enclose`, consider the following two variables `Names` and `NewName`
 
 ~~~
-┌→────┐
-↓ragdE│
-│nallA│
-│  eoP│
-└─────┘
+       Names←'Bach' 'Hayden' 'Mozart'
+       NewName←'Beethoven'
+       Names
+┌────┬──────┬──────┐
+│Bach│Hayden│Mozart│
+└────┴──────┴──────┘
+       NewName
+Beethoven
+       (≢Names) (≡Names)
+3 2
+       (≢NewName) (≡NewName)
+9 1
 ~~~
-
-4. Write an expression that returns a matrix of names right
-aligned (Hint: Sometimes we want to operate on each item 
-of an array with a structural function}:
-
-~~~
-┌→────┐
-↓Edgar│
-│Allan│
-│  Poe│
-└─────┘
-~~~
-
-5. Write an expression that produces:
+`Names` is a 3-item nested vector of character vectors. Its tally is 3, its depth is 2.
+`NewName` is a 9-item simple vector. Its tally is 9, its depth is 1.' 
+Consider how to combine `Names` and `NewName` to create the 4-item vector of vectors:
 
 ~~~
-┌→──────────────────────────┐
-│ ┌→──┐ ┌→────────────────┐ │
-│ │Poe│ │ ┌→────┐ ┌→────┐ │ │
-│ └───┘ │ │Edgar│ │Allan│ │ │
-│       │ └─────┘ └─────┘ │ │
-│       └∊────────────────┘ │
-└∊──────────────────────────┘ 
-~~~
+┌────┬──────┬──────┬─────────┐
+│Bach│Hayden│Mozart│Beethoven│
+└────┴──────┴──────┴─────────┘
+~~~ 
 
-6. Write an expression that produces:
+First let's join all the names using juxtaposition:
 
 ~~~
-┌→──────────────┐
-│ ┌→──┐ ┌→────┐ │
-│ │Poe│ ↓Edgar│ │
-│ └───┘ │Allan│ │
-│       └─────┘ │
-└∊──────────────┘
+      AllNames1←Names NewName
+      AllNames1
+┌────────────────────┬─────────┐
+│┌────┬──────┬──────┐│Beethoven│
+││Bach│Hayden│Mozart││         │
+│└────┴──────┴──────┘│         │
+└────────────────────┴─────────┘
+      (≢AllNames1)(≡AllNames1)
+2 ¯3
 ~~~
 
-7. Write an expression that produces:
+The result of the juxtapostion is a deeper, 2-item vector. Clearly not what we are looking for.
+Second, let's join via the catenate function (comma `,`):
 
 ~~~
-┌→────────────────────┐
-│ ┌→──┐ ┌→──────────┐ │
-│ │Poe│ │Edgar-Allan│ │
-│ └───┘ └───────────┘ │
-└∊────────────────────┘
+      AllNames2←Names,NewName
+      AllNames2
+┌────┬──────┬──────┬─┬─┬─┬─┬─┬─┬─┬─┬─┐
+│Bach│Hayden│Mozart│B│e│e│t│h│o│v│e│n│
+└────┴──────┴──────┴─┴─┴─┴─┴─┴─┴─┴─┴─┘
+      (≢AllNames2) (≡AllNames2)
+12 ¯2
 ~~~
+
+Here the catenate function has a 3-item nested vector as its
+left argument and a 9-item simple vector as its right argument yielding a 12-item vector
+where the first three items are vectors and the last 9 items are simple scalars. This is also
+clearly not what we are looking for.
+
+Third and finally, lets try catenating the enclose of `NewName` on to the end of `Names`:
+
+~~~
+      AllNames3←Names,⊂NewName
+      AllNames3
+┌────┬──────┬──────┬─────────┐
+│Bach│Hayden│Mozart│Beethoven│
+└────┴──────┴──────┴─────────┘
+      (≢AllNames3)(≡AllNames3)
+4 2
+~~~
+
+The `enclose` function makes a scalar out of `NewName`, increasing its depth by 1, with 
+the salutary result that the catenate function is now adding only one nested item to the list of names
+rather than 12 simple scalars. 
+ 
+The inverse of `enclose` is `disclose` (right show `⊃`). That is, for any array `A`,
+`A≡⊃⊂A` is true. Thus disclose removes a level of nesting:
+
+~~~
+      ⊂'Hello world!'
+┌────────────┐
+│Hello world!│
+└────────────┘
+      ⊃⊂'Hello world!'
+Hello world!
+
+~~~
+
+However, `disclose` is not only the inverse of `enclose`; it has some additional functionality,
+and is also called `first`.
+It selects and then discloses the first item in its argument:
+
+~~~
+      Names
+┌────┬──────┬──────┐
+│Bach│Hayden│Mozart│
+└────┴──────┴──────┘
+      ⊃Names
+Bach
+      ⊃4 5 6
+4
+      ⊃'Hello world!'
+H
+~~~      
+
+The `first` function works on arrays of any rank:
+
+~~~
+       M←3 4⍴⌽⍳12
+       M
+12 11 10 9
+ 8  7  6 5
+ 4  3  2 1
+       ⊃M
+12
+~~~
+
+`First` is a more general definition that encompasses the definition of `disclose`.
+It follows from this additional functionality that while `disclose` 
+is strictly t.he inverse of `enclose`, the reverse is not true:
+
+~~~
+      Names
+┌────┬──────┬──────┐
+│Bach│Hayden│Mozart│
+└────┴──────┴──────┘
+      ⊃Names
+Bach
+      ⊂⊃Names
+┌────┐
+│Bach│
+└────┘
+      Names≡⊂⊃Names
+0  
+~~~
+
+`Disclose`, like `enclose` has no effect on a simple scalar:
+
+~~~
+      ⊃5
+5
+      ⊃⊃5
+5
+      ⊂'a'
+a
+      ⊂⊂⊂'a'
+a
+~~~
+
+## Disclose and Reduction
+
+Consider the  
+
+
+
+
+
+
+
+
+
+
+
+

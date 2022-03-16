@@ -341,3 +341,4 @@ decreases the rank, and moves us deeper in depth (increases the depth):
 
 `Split` does not remove trailing blanks, so mix and split are only perfect
 inverses if the original vectors are all the same length.
+

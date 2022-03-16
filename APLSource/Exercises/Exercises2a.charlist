@@ -1,0 +1,54 @@
+# Chapter 2 - Spring Break Exercises
+
+1. Write a function that takes a vector of character vectors, and returns a single, simple, comma delimited character vector:
+
+~~~
+      {your code here}'Monday' 'Tuesday' 'Wednesday'
+Monday,Tuesday,Wednesday
+~~~
+
+2. Enhance the function above to take a left argument that defines the delimiter:
+
+~~~
+   '-' {your code here}'Monday' 'Tuesday' 'Wednesday'
+Monday-Tuesday-Wednesday
+~~~
+
+3. Enhance the function above to optionally take a left argument, and if ommitted, defaults to comma:
+
+~~~
+   '*' {your code here}'Monday' 'Tuesday' 'Wednesday'
+Monday*Tuesday*Wednesday
+   {your code here}'Monday' 'Tuesday' 'Wednesday'
+Monday,Tuesday,Wednesday
+~~~
+
+4. Given a simple numeric vector, write a function that returns a two-item vector containing the smallest and 
+largest value:
+
+~~~
+      {your code here} 8 7 33 21 4 5
+4 33
+~~~
+
+5. Modify the above function to return a single value representing the range of the argument, that is
+the largest value minus the smallest value:
+
+~~~
+      {your code here} 8 7 33 21 4 5
+29
+~~~
+
+6. Given a vector of numeric vectors, write a function that yields the total of all of the elements:
+
+~~~
+      {your code here} (1 3 2) (3 3 5 4) (8 7)
+36
+~~~
+
+7. Given a vector of numeric vectors, write a function that yields the number of elements of the longest vector:
+
+~~~
+   {your code here} (1 3 2) (3 3 5 4) (8 7)
+4
+~~~

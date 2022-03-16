@@ -60,3 +60,108 @@ but produces a matrix of Celsius and Fahrenheit values:
 ~~~
 
 5. Why is Fahrenheit a better temperature scale than Celsius?
+
+
+## More Exercises
+
+Create three variables as follows:
+
+~~~
+       First←'Edgar'
+       Middle←'Allan'
+       Last←'Poe'
+~~~
+
+In each of the challenges below, write an expression using
+the three variables to produce the requested result.
+The results are displayed using the `]display` user command,
+so make sure you use that to check your answer.
+
+> Remember that when the instructions are to write an "expression"
+> you do not need to use a function with `{...}` and `⍺` and `⍵` (although you may).
+> You may just operate on the variable names themselves.
+
+1. Write an expression using the three variables that yields a simple vector of the 
+full name separated by spaces. The result should `]display` 
+as follows:
+
+~~~
+┌→──────────────┐
+│Edgar Allan Poe│
+└───────────────┘ 
+~~~
+
+2. Write an expression that returns a matrix with the three
+names shown vertically, in columns rather than rows:
+
+~~~
+┌→──┐
+↓EAP│
+│dlo│
+│gle│
+│aa │
+│rn │
+└───┘  
+~~~
+
+3. Write an expression that returns a matrix of names backwards
+right aligned:
+
+~~~
+┌→────┐
+↓ragdE│
+│nallA│
+│  eoP│
+└─────┘
+~~~
+
+4. Write an expression that returns a matrix of names right
+aligned (Hint: Sometimes we want to operate on each item 
+of an array with a structural function}:
+
+~~~
+┌→────┐
+↓Edgar│
+│Allan│
+│  Poe│
+└─────┘
+~~~
+
+5. Write an expression that produces:
+
+~~~
+┌→──────────────────────────┐
+│ ┌→──┐ ┌→────────────────┐ │
+│ │Poe│ │ ┌→────┐ ┌→────┐ │ │
+│ └───┘ │ │Edgar│ │Allan│ │ │
+│       │ └─────┘ └─────┘ │ │
+│       └∊────────────────┘ │
+└∊──────────────────────────┘ 
+~~~
+
+6. Write an expression that produces:
+
+~~~
+┌→──────────────┐
+│ ┌→──┐ ┌→────┐ │
+│ │Poe│ ↓Edgar│ │
+│ └───┘ │Allan│ │
+│       └─────┘ │
+└∊──────────────┘
+~~~
+
+7. Write an expression that produces:
+
+~~~
+┌→────────────────────┐
+│ ┌→──┐ ┌→──────────┐ │
+│ │Poe│ │Edgar-Allan│ │
+│ └───┘ └───────────┘ │
+└∊────────────────────┘
+~~~
+
+
+
+
+
+

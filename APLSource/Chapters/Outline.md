@@ -1,13 +1,46 @@
 # Outline
 
-## Chapter 1: Introduction to Arrays and Functions
+Each chapter or section should have material for a 45 minute interactve class where students
+are trying stuff out themselves.
 
-Scalars, Vectors, and Matrices. Basic scalar functions. Reduce operator. Shape, respape, min. max,dfns.
+Each chapter should have a problem set focused on cummulatively applying the concepts and functions
+covered to date, around a particular theme (like Soduko, or converting Fahrenheit to Celcius,
+or Wordle, or gas, or stats, etc.
 
-## Chapter 2: Arrays in Depth
+1. Introduction
 
-Nested arrays. Shape, rank, tally, depth. The Each Operator. Trading rank and depth.
-Mix and Split. Mixed arrays. 
+Numeric scalars and vectors, + - x ÷, scalar functions, scalar extension,
+monadic and dyadic, ⌈ ⌊ *,|, negative numbers, E notation, order of operations, parentheses
+
+3. Reduce Operator
+
+/+/ ⌈/ ⌊/
+
+2. Structural Functions
+
+⍴ ⍳ ⌽ ⍉ ⊖ ↓ ↑, matrices, character data  
+
+3. User define function
+
+{⍺ ⍵} etc.
+
+4. Tally, Shape and Rank 
+
+≢ ⍴ and ⍴⍴
+
+4. Nested Arrays
+
+Depth, juxapostion, match catenate, ravel
+
+6. The Each Operator
+
+7. Trading rank and depth.
+
+Mix and Split. Mixed arrays.
+
+8. Enclose and Disclose (First) 
+
+
 
 ## Chapter 3: Indexing, Sorting, Searching, selecting.
 
@@ -26,6 +59,11 @@ Useful scans.
 
 ⎕NS, pass by reference, arrays of namespaces. JSON and ⎕JSON. 
 
+## Chapter 6.5 Rank and Axes.
+
+Even more on arrays. Major cells. All the primitives that take axis specification.
+The rank operator.
+
 ## Chapter 7: Namespaces for Organizing Functions 
 
 )NS, )CS, ⎕THIS. #, ##, #.This.That. etc.
@@ -42,7 +80,7 @@ How to save your work. Dado, Git, GitHub
 
 Packages, Dependencies, Applications. 
 
-## Cahpter 11: Data Types and Storage
+## Chapter 11: Data Types and Storage
 
 Bits, bytes, ⎕DR, etc. 
 
