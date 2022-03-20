@@ -1,0 +1,77 @@
+# Chapter 6
+
+> In which the glyphs `∊ ∪ ∩` are introduced, dyadic ~ is presented, 
+the dual role of the glyphs `/` and `\\` as operators and functions is explained, dyadic
+
+
+## Set Functions
+
+The epsilon glyph `∊` in its dydadic form is the ***member of*** function. It tests
+whether or not any item in the left argument is found anywhere in the right argument:
+
+
+The shape of the result is always the same shape as the left argument:  
+                                                                      
+                                                                      
+The shape of the right argument is immaterial, as ***member of*** is just looing for the existance
+of an item:
+
+The downshoe glyph `∪` in its dyadic form is the ***union*** function. Union returns
+its left argument catenated with all of the items in its right argumnet that are not found
+in left argument: 
+                                                               
+Union requires both of its arguments to be rank 1 or less (a vector or scalar),
+that is, vector or scalar: 
+
+Monadic `∪` is the **unique** function. It returns the unque values in its argument:
+
+The upshoe glyph `∩` only has a dyadic form: the ***intersection*** function. It yields
+all of the items in its left argument that exist in the right argument: 
+
+
+Dyadic tilda `~` is the function ***without***. It retruns its left argument without any
+items that are found in the right argument:  
+
+> Reminder: Monadic ~ is the ***logical not*** function, introced on Chapter 2
+
+These set functions are structural functions. As such, they operate on the top level items of their
+array arguments.  
+
+
+## Replicate and Expand
+                                                   
+
+
+The slash glyph '/' has already been introduced as the reduce operater. However it does
+double duty as the *replicate*** function:
+
+~~~
+      1 1 2 1 2 1 2 1/'Misisipi'
+Mississippi
+~~~
+
+Each item in the right argument is replicated the number of times indicated by the correponding
+integer in the left argument. A zero in the left argument indicates zero replications, effectively
+omitting the corresponding item on the right:
+
+~~~
+      2 0 3/7 8 9
+7 7 9 9 9
+~~~
+      
+A negative integer in the left argument means replicating a zero or a blank for the corresponding 
+item in the right argument, depending on whether or not the right argument is character or numeric:
+
+  
+
+
+
+Scalar extention applies to the left argument:
+
+When the left argument to replicate is a boolean vector the function may be 
+thought of as selecting those items on the right whose 
+
+
+the function is sometimes 
+called  ***compress***
+

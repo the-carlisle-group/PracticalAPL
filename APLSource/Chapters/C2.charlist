@@ -1,0 +1,136 @@
+# Chapter 2
+
+> In which the glyphs `⍴ ⍳ ⍉ ⌽ ⊖ = ≠ ≤ < > ≥ ∧ ∨ ~` are introduced
+and the terms structural function, matrix, shape, reshape, transpose, reverse, rotate,
+boolean value, boolean function, true, false, character data,
+numeric data, mixed data, and type are informally defined. 
+
+
+## Structural Functions
+
+In addition to scalar functions, APL has other functions referred to as **structural functions**.
+The Greek letter iota (`⍳`), in its monadic form, is the ***index generator*** function,
+and the Greek letter rho (`⍴`) is the ***shape*** function:  
+
+~~~
+     ⍳5
+1 2 3 4 5
+     ⍴8 9 10
+3
+~~~
+
+The dyadic form of iota is ***index of***, which looks up the items of the right argument in the left argument
+and returns their location:
+
+~~~
+      56 43 54 22 8⍳54 56 9
+3 1 6
+~~~
+
+The dyadic form of rho is ***reshape***, which reshapes the right argument according to the left argument:
+
+~~~
+      5⍴1 
+1 1 1 1 1
+      5⍴1 2 3
+1 2 3 1 2
+      5⍴10 9 8 7 6 5 4 3 2 1
+10 9 8 7 6
+~~~
+
+By inspection we can see that reshape will recycle elements if the right argument is too short,
+and truncate elements if the right argument is too long.
+
+The left argument to reshape may be a two-item vector (and even longer, as we shall see later):
+
+~~~
+      3 4⍴⍳12
+1  2  3  4
+5  6  7  8
+9 10 11 12
+~~~
+
+The result is neither a scalar nor a vector, but a **matrix** of 3 rows and 4 columns. 
+Scalar, vector, and matrix are the three most commonly used APL array shapes, but
+APL can create and manipulate arrays of many more dimensions.
+
+
+## Character Data
+
+APL functions manipulate character data just like numeric data.
+Character data is enclosed in single quotes, and just like numeric
+data we may use shape and reshape on it:
+
+~~~
+      'A'
+A
+      ⍴'Hello world!'
+12
+      2 6⍴'Hello world!'
+Hello 
+world!
+      'Hello world!'⍳'door'
+11 5 5 9
+~~~
+
+We may choose to view a character vector as a word or a sentance
+but APL knows only about arrays of characters.
+
+## Relational Functions and Boolean Values
+
+The scalar dyadic functions represented by the glyphs =, ≠, , <  
+are equals, not equals, .... repectivley. Each one of these functions returns a boolean value,
+true or false, represented by a numeric 1 or 0:
+
+...
+   
+  
+~~~
+      5>3
+1
+      5 2<3 4
+0 1
+      5≥⍳10
+1 1 1 1 1 0 0 0 0 0
+      'hello world'='l'
+0 0 1 1 0 0 0 0 0 1 0
+~~~
+ 
+Because Booleans are just the numeric values 1 and 0, we can apply arithmetic
+functions to them. Consider the question of how many values in a vector
+are greater than 100:
+
+~~~
+     +/98 97 101 99 110 112>100
+3
+~~~  
+
+## Boolean Functions
+ 
+and or not ∧ ∨  ~  , reductions
+
+Boolean functions all take boolean values as arguments and return
+boolean values as results. ***Logical and***  and ***logical or*** are the two
+primary boolean functions:
+
+~~~
+      1∧0 
+0
+      1∨0
+1
+~~~
+
+These functions are also supremely useful with the reduce operator.
+***And reduction*** answers the question are ***all*** items true, while ***or reduction***
+answers the questions are ***any*** items true:
+
+~~~
+      ∧/1 0 1 0
+0
+      ∨/1 0 1 0
+1
+      ∧/1 1 1 1
+1
+~~~
+
+

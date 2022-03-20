@@ -4,17 +4,23 @@ Each chapter or section should have material for a 45 minute interactve class wh
 are trying stuff out themselves.
 
 Each chapter should have a problem set focused on cummulatively applying the concepts and functions
-covered to date, around a particular theme (like Soduko, or converting Fahrenheit to Celcius,
-or Wordle, or gas, or stats, etc.
+covered to date, around a particular theme (like Soduko, or converting Fahrenheit to Celsius,
+or Wordle, etc.
 
-1. Introduction
+1. Introduction - A broad over view
 
+
+1. Arrays, Functions, and Operators.
 Numeric scalars and vectors, + - x ÷, scalar functions, scalar extension,
-monadic and dyadic, ⌈ ⌊ *,|, negative numbers, E notation, order of operations, parentheses
+monadic and dyadic, ⌈ ⌊ *,|, negative numbers, E notation, order of operations, parentheses,
+reduction, 
 
-3. Reduce Operator
+2. Relational Logical functions ∧ and ∨
 
-/+/ ⌈/ ⌊/
+
+3. Reduce Operator, Scan operator.
+
+/ , sum +/, max ⌈/ , min ⌊/
 
 2. Structural Functions
 
