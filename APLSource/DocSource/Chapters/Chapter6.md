@@ -1,7 +1,7 @@
-# Chapter 6
+# Chapter 6 -  Set Functions
 
-> In which the glyphs `∊ ∪ ∩` are introduced, dyadic `~` is presented, 
-and the dual role of the glyphs `/` and `\\` as operators and functions is explained.
+> In which the glyphs `∊ ∪ ∩ ⍷ ⍸` are introduced, dyadic `~` is presented,
+> and the dual role of the glyphs `/` and `\\` as operators and functions is explained.
 
 
 ## Set Functions

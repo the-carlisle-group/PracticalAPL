@@ -1,10 +1,9 @@
-# Chapter 1
+# Chapter 1 - Arrays and Functions
 
-> In which the glyphs `+ - × ÷ * ⌈ ⌊ |` are introduced, and the terms array, function, operator,
-scalar, vector, scalar function, scalar extention, glyph, conforming, non-conforming,
-right argument, left argument, monadic, dyadic, 
-expression, and order of operations, high minus, are informally defined. 
-
+> In which the glyphs `+ - × ÷ ⌈ ⌊ ⍳ ⍴ /` are introduced, and the terms array, function, operator,
+> scalar, vector, matrix, scalar function, scalar extention, glyph, conforming, non-conforming,
+> right argument, left argument, monadic, dyadic, right operand, left operand,
+> expression, order of operations, high minus, are informally defined. 
 
 ## Arrays and Functions
 
@@ -19,7 +18,7 @@ Consider adding the two numbers using the `plus` function:
 The function `plus` is applied to two arrays (with value 2 and 3),
 yielding or evaluating to a 3rd array with the value 5.
 The term **array** is general, and arrays that have certain properties
-may described in more precise terms.
+may be described in more precise terms.
 An array that is a single number like 2, 3 or 5 above, is called a **scalar**.
 A list of numbers is called a **vector**, and the plus function may be applied to them
 as well:
@@ -114,7 +113,7 @@ while the monadic form of upstile is called **ceiling** and rounds up to the nea
 
 ## Expressions and the Order of Operations
 
-An **expression** is a combination of arrays and one or more functions that may be evaluated to 
+An **expression** is a combination of arrays and functions that may be evaluated to 
 produce an array.  
 
 In APL, all functions are created equal, none has higher precedence than another. 
@@ -125,7 +124,7 @@ There is one simple rule, evaluation is from right to left:
 12    
 ~~~
 
-In this expression, the plus funcion is evaluated first, producing 3, which is then 
+In this expression, the plus function is evaluated first, producing 3, which is then 
 multiplied by 4 to produce 12. Another way of reading the expression is 4 
 times everything to right, which is 2 plus everything to the right.
  
@@ -140,7 +139,7 @@ APL programmers try to avoid the use of parenthesis. This is often
 possible by simply rearranging the order of the functions in an expression. 
 
 
-## Negative Numbers and E Notation
+## Negative Numbers
 
 Negative numbers are represented by a high minus sign:
 
@@ -168,12 +167,45 @@ In the first case the monadic function negate is applied to the number 4, yieldi
 In the second case negate is applied to the result of 4 minus 10. In the third case, negative
 2 is subtracted from 4, and in the forth case, 10 is subtracted from negative 4.
 
-## More Arithmetic Scalar Functions
+## Structural Functions
 
-| *
-Introdu mondadic | here, then dyadic  
- * |
+In addition to scalar functions, APL has other functions referred to as **structural functions**.
+The Greek letter iota (`⍳`), in its monadic form, is the ***index generator*** function,
+and the Greek letter rho (`⍴`) is the ***shape*** function:  
 
+~~~
+     ⍳5
+1 2 3 4 5
+     ⍴8 9 10
+3
+~~~
+    
+The dyadic form of rho is ***reshape***, which reshapes the right argument according to the left argument:
+
+~~~
+      5⍴1 
+1 1 1 1 1
+      5⍴1 2 3
+1 2 3 1 2
+      5⍴10 9 8 7 6 5 4 3 2 1
+10 9 8 7 6
+~~~
+
+By inspection we can see that `reshape` will recycle elements if the right argument is too short,
+and truncate elements if the right argument is too long.
+
+The left argument to reshape may be a two-item vector (and even longer, as we shall see later):
+
+~~~
+      3 4⍴⍳12
+1  2  3  4
+5  6  7  8
+9 10 11 12
+~~~
+
+The result is neither a scalar nor a vector, but a **matrix** of 3 rows and 4 columns. 
+Scalar, vector, and matrix are the three most commonly used APL array shapes, but
+APL can create and manipulate arrays of many more dimensions.
 
 ## Operators
 
@@ -186,7 +218,7 @@ from 1 to 5. We could write:
 15
 ~~~
 
-The  ***reduce*** operator (the slash symbol `/`) takes a function
+The monadic ***reduce*** operator (the slash symbol `/`) takes a function
 and inserts it between each element which is exactly what we
 did manually above:
 
@@ -197,7 +229,7 @@ did manually above:
 
 In this case, ***reduce*** takes the ***plus*** function as
 its **left operand** and returns a new function `+/` that we
-might call "sum". Thus to sum up the numbers from 1 to 1000:
+might call "sum". Thus to sum up the numbers from 1 to 100:
 
 ~~~
      +/⍳100
@@ -215,7 +247,7 @@ finding the maximum or minimum value in a vector:
 2
 ~~~
 
-An operator looks to its left for a function, 
+A monadic operator looks to its left for a function, 
 and then takes that function and applies it in some special way
 to the data on the right.
 
@@ -248,4 +280,6 @@ which is not equal to:
 ¯13
 ~~~
 
-
+Just like there are monadic and dyadic functions, there are monadic
+and dyadic operators. Note however that while a monadic function takes
+only a right argument, a monadic operator takes only a left operand.
