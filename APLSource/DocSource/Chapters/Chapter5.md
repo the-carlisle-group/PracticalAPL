@@ -1,7 +1,247 @@
-# Chapter 5 - Arrays in Depth, Part 2
+# Chapter 5 - Arrays in Depth
 
-> In which the glyphs `⊂ ⊃ ,` are introduced, dyadic `≡` is explained 
-> and the terms juxtaposition, catenation, strand notation, are defined.
+> In which the glyphs `≡ ¨ ⊂ ⊃ ,` are introduced and the monadic use of `↑ ↓` demonstrated. 
+> The terms simple array, nested array, juxtaposition, catenation, strand notation,
+> and depth are discussed.
+> User commands ]box and ]display are explained.
+
+
+## Simple and Nested Arrays
+
+In all of the examples in the first chapter, the arrays have all been **simple**.
+This means that each item of the array is a simple scalar, like the character 'a',
+or the number 5 or 2.7182.
+Arrays, however, may be nested, which means that any item of the array may itself be a general array
+and not specifically a scalar.
+Nested numeric arrays may be composed by juxtapostion with parentheses:
+
+~~~
+      (1 2 3) (4 5) (6 7 8 9)
+ 1 2 3  4 5  6 7 8 9
+~~~
+
+This is a three item vector, where the first item is itself a three item vector,
+the second item is a two element vector, and the third item is a four-element vector.  
+Nested character arrays may be composed by juxtaposition with no need for parentheses:
+
+~~~
+      'January' 'February' 'March'
+ January  February  March 
+~~~
+
+It is difficult to see the structure of the result in the session, as
+by befault the APL interpeter just adds an extra blank between the items.
+The user command `]box` sets the display of arrays to a more readable form:  
+
+~~~
+      ]box on
+Was OFF
+      (1 2 3) (4 5) (6 7 8 9)
+┌─────┬───┬───────┐
+│1 2 3│4 5│6 7 8 9│
+└─────┴───┴───────┘
+      'January' 'February' 'March'
+┌───────┬────────┬─────┐
+│January│February│March│
+└───────┴────────┴─────┘
+~~~
+
+Now we can clearly see the structure of the array. Nesting can go arbitrarily deep:
+
+~~~
+     (1 2 3)  ((4 5)((6 7)(8 9 10)))
+┌─────┬──────────────────┐
+│1 2 3│┌───┬────────────┐│
+│     ││4 5│┌───┬──────┐││
+│     ││   ││6 7│8 9 10│││
+│     ││   │└───┴──────┘││
+│     │└───┴────────────┘│
+└─────┴──────────────────┘
+
+     ('Edgar' 'Codd') ('Chris' 'Date') ('Adam' 'Smith')
+┌────────────┬────────────┬────────────┐
+│┌─────┬────┐│┌─────┬────┐│┌────┬─────┐│
+││Edgar│Codd│││Chris│Date│││Adam│Smith││
+│└─────┴────┘│└─────┴────┘│└────┴─────┘│
+└────────────┴────────────┴────────────┘
+~~~
+
+Items of any array can be nested, not just vectors:
+
+~~~
+      3 3 ⍴(1 2) (3 4 5) (6 7)
+┌───┬─────┬───┐
+│1 2│3 4 5│6 7│
+├───┼─────┼───┤
+│1 2│3 4 5│6 7│
+├───┼─────┼───┤
+│1 2│3 4 5│6 7│
+└───┴─────┴───┘
+~~~
+
+Thus we may have vectors of vectors, vectors of matrices, matrices of
+vectors, and  so on.
+
+Scalar functions, in addition to supporting scalar extention as
+we saw in chapter 1, are also **pervasive**. This means that a scalar
+function will go down as deep as necessary:
+
+~~~
+      3×(1 2 3) (4 5) ((6 7 8) (9 10))
+┌─────┬─────┬────────────────┐
+│3 6 9│12 15│┌────────┬─────┐│
+│     │     ││18 21 24│27 30││
+│     │     │└────────┴─────┘│
+└─────┴─────┴────────────────┘
+      1 2 3×(1 2 3) (4 5) ((6 7 8) (9 10))
+┌─────┬────┬────────────────┐
+│1 2 3│8 10│┌────────┬─────┐│
+│     │    ││18 21 24│27 30││
+│     │    │└────────┴─────┘│
+└─────┴────┴────────────────┘
+~~~
+
+
+## Depth
+
+The **depth** of an array is a measure of how nested it is:
+
+~~~
+     ≡5
+0
+     ≡1 2 3
+1
+     ≡'Hello World'
+1
+     ≡'Hello' 'World'
+2
+     ≡('Edgar' 'Codd') ('Chris' 'Date') ('Adam' 'Smith')
+3
+~~~
+
+The depth of a array may be thought of as the number of 
+steps needed to navigate to the deepest 
+simple scalar. In the last example above, we would need 3 moves
+to navigate to the 's' in Chris: first go to the 2nd item, then
+to the 1st item (of that 2nd item), and finally to the 5th item
+(of the 1st item of the 2nd item).
+
+
+## The Each Operator 
+
+Consider this nested array of names, and the tally of it:
+
+~~~
+        Names←('Chris' 'Date') ('Edgar' 'Frank' 'Codd') ('Adam' 'Smith')
+        Names
+┌────────────┬──────────────────┬────────────┐
+│┌─────┬────┐│┌─────┬─────┬────┐│┌────┬─────┐│
+││Chris│Date│││Edgar│Frank│Codd│││Adam│Smith││
+│└─────┴────┘│└─────┴─────┴────┘│└────┴─────┘│
+└────────────┴──────────────────┴────────────┘
+        ≢Names
+3      
+~~~
+
+The `each` operator allows us to compute the length of each item:
+
+~~~
+     ≢¨Names
+2 3 2
+~~~
+
+Remember, an operator is a higher order function that takes a function as input
+on its left (the left operand), and returns a new function that 
+applies the left operand in a special way. The `each` operator applies its operand,
+in this case tally, to each item in the array instead of to the whole array.
+
+To find the length of each item inside each item, apply `each`  twice:
+
+~~~
+      ≢¨¨Names
+┌───┬─────┬───┐
+│5 4│5 5 4│4 5│
+└───┴─────┴───┘
+~~~
+
+To compute the total number of letters in each full name:
+
+~~~
+      +/¨≢¨¨Names
+9 14 9
+~~~
+
+To compute the length of the longest name:
+
+~~~
+      ⌈/+/¨≢¨¨Names
+14
+~~~
+
+It is never necessary to use the `each` operator with a scalar function operand:
+as, by definition, scalar functions have a built-in `each`:
+
+~~~
+                 2 3+¨(1 2 3) (4 5 6 7)
+┌─────┬────────┐
+│3 4 5│7 8 9 10│
+└─────┴────────┘
+                 2 3+(1 2 3) (4 5 6 7)
+┌─────┬────────┐
+│3 4 5│7 8 9 10│
+└─────┴────────┘
+~~~
+
+## Vectors and Matrices: Trading Depth and Rank
+
+Consider this vector of vectors:
+
+~~~
+Trucks←'Ford' 'Chevrolet' 'Honda' 'Ram'
+      Trucks
+┌────┬─────────┬─────┬───┐
+│Ford│Chevrolet│Honda│Ram│
+└────┴─────────┴─────┴───┘
+      ⍴Trucks
+4
+      ≢⍴Trucks
+1
+      ≡Trucks
+2
+~~~
+
+The `mix` function (monadic up-arrow) will take a vector of vectors and construct a 
+matrix. If the individual vetors are not the same lenght, they are padded with blanks
+as necessary: 
+
+~~~
+      TrucksMatrix←↑Trucks
+      TrucksMatrix
+Ford     
+Chevrolet
+Honda    
+Ram      
+      ⍴TrucksMatrix
+4 9
+      ≢⍴TrucksMatrix
+2
+      ≡TrucksMatrix
+1
+~~~
+
+Mix increases the rank and moves us upward in depth (decreasing the depth). Conversely,
+the `split`  function (mondadic down-arrow) 
+decreases the rank, and moves us deeper in depth (increases the depth):
+
+~~~
+     ↓TrucksMatrix
+┌─────────┬─────────┬─────────┬─────────┐
+│Ford     │Chevrolet│Honda    │Ram      │
+└─────────┴─────────┴─────────┴─────────┘ 
+~~~
+
+`Split` does not remove trailing blanks, so mix and split are only perfect
+inverses if the original vectors are all the same length.
 
 ## Match
 
@@ -339,18 +579,6 @@ a
       ⊂⊂⊂'a'
 a
 ~~~
-
-## Disclose and Reduction
-
-Consider the  
-
-
-
-
-
-
-
-
 
 
 

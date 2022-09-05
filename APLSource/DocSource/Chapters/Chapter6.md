@@ -1,161 +1,117 @@
-# Chapter 6 -  Set Functions
+# Chapter 6 - Indexing, Sorting, and Searching 
 
-> In which the glyphs `∊ ∪ ∩ ⍷ ⍸` are introduced, dyadic `~` is presented,
-> and the dual role of the glyphs `/` and `\\` as operators and functions is explained.
+> In which the glyphs `[] ⍒ ⍋ ⍸` are introduced dyadic `⍳` is explained,
+> and the terms grading and sorting explained.
+
+## Bracket Indexing
+
+ (Note that reach indexing and functional indexing and scatter point indexing - later chapter)
+
+## Index Of (Dyadic Iota)
 
 
-## Set Functions
+## Grading and Sorting
 
-The epsilon glyph `∊` in its dydadic form is the ***member of*** function. It tests
-whether or not any item in the left argument is found anywhere in the right argument,
-returning a boolean array:
-
-~~~
-      'Orange'∊'aeiouAEIOU'
-1 0 1 0 0 1
-~~~
-
-The shape of the result is always the same shape as the left argument:  
-
-~~~
-       (3 4⍴⍳12)∊2 7 1
-1 1 0 0
-0 0 1 0
-0 0 0 0                                                                      
-~~~
-
-The shape of the right argument is immaterial, as ***member of*** is just looking for the existance
-of an item:
+Sorting in APL is a two-step process that begins with **grade up** (`⍋`) or **grade down** (`⍒`)' 
+Grade up and grade down do not directly sort their arguments. They return the indices that may then be
+used to sort the argument. Consider a set of test scores S, and the application of grade up and grade down:
 
 ~~~
-      'Orange'∊2 5⍴'aeiouAEIOU'
-1 0 1 0 0 1
+      S←99 98 100 72 86 81 79  
+      ⍋S
+4 7 6 5 2 1 3
+      ⍒S
+3 1 2 5 6 7 4
 ~~~
 
-***Member of*** is a structural function, not a scalar function:
+In the result of grade up, the first item 4 indicates that the 4th item of S is the lowest item.
+The second item 7 indicates that the 7th item of S is the next lowest item, and so on.
+lowest item, and so on. In other words, grade up returns the indices of the items in S ordered
+from the lowest to highest. Similarly grade down returns the indices of the items in S ordered from highest
+to lowest. These indices may then be used to sort the vector S:
 
 ~~~
-      'lime' 'mango'∊'apple' 'pear' 'lime'  
-1 0
-      'lime' 'mango'∊'apple' 'pear' (⊂'lime')  
-0 0
-      'lime'∊'apple' 'pear' 'lime'  
-0 0 0 0
+     S[⍋S]
+72 79 81 86 98 99 100
+     S[⍒S]
+100 99 98 86 81 79 72  
 ~~~
 
-The downshoe glyph `∪` in its dyadic form is the ***union*** function, which returns
-its left argument catenated with all of the items in its right argument that are not found
-in the left argument:
+Observe that the result of grade up and grade down is always a permution of integers from 1 to N, where N is the
+length of the vector being graded, and thus indexing by the grade vector will select all of the items in a particular order.
+Observe further that in the example above, the grade down of S is the exact reverse
+of the grade up of S. This is only the case if the items of the argument are unique. If there are duplicates, the 
+grade vectors will not be the reverse of each other: 
 
 ~~~
-      'Edgar' 'Allan' ∪ 'Allan' 'Poe'
-┌─────┬─────┬───┐
-│Edgar│Allan│Poe│
-└─────┴─────┴───┘
-      1 1 2 3 ∪ 4 1 1 2 3  5
-1 1 2 3 4 5
+       V← 'Zuchini' 'Brocoli' 'Aubergine' 'Spinich'  'Zuchini' 
+       ⍋V
+3 2 4 1 5
+       ⍒V
+1 5 4 2 3
 ~~~
 
-***Union*** requires both of its arguments to be rank 1 or less (a vector or scalar),
-and it always returns a vector. 
-
-Monadic `∪` is the **unique** function. It returns the unique items in its argument,
-or alternatively may be thought of as removing duplicate items:  
+The usefulness of having sorting as a two-step process is that it is often the case that we want sort
+one array based on another corresponding array. Consider:
 
 ~~~
-      ∪'Edgar' 'Allan' 'Allan' 'Poe'
-┌─────┬─────┬───┐
-│Edgar│Allan│Poe│
-└─────┴─────┴───┘
-      ∪'Mississippi'
-Misp
+          Names←'Bob' 'Lisa' 'Joe' 'Dave' 'Mary'
+          Scores←101 99 85 99 89 
+          Times←19 15 16 18 17
+          M←⍉↑Names Scores Times
+          M
+ Bob   101 19
+ Lisa   87 15
+ Joe    85 16
+ Dave   99 18
+ Mary   99 17
 ~~~
 
-***Unique*** works on higher rank arrays, but this behavior will be coverered in chapter X.
-
-The upshoe glyph `∩` only has a dyadic form, the ***intersection*** function, which yields
-all of the items in the left argument that exist in the right argument:
+To order the names by highest score:
 
 ~~~
-     'aeiou'∩'iota'
-aio
-~~~ 
-
-Dyadic tilda (`~`) is the function ***without***. It returns its left argument without any
-items that are found in the right argument: 
-
-~~~
-      2 7 1 8 2 8 1 8~2 8
-7 1 1
-
+      Names[⍒Scores]
+ Bob  Dave  Mary  Lisa  Joe 
 ~~~
 
-The left argument to **without** must be a scalar or vector, and the result is always a vector.
-Like **member of**, the shape of the right argument is immaterial.
-
-> Reminder: monadic `~` is the ***logical not*** function, introduced in Chapter 2.
-
-These set functions are structural functions. As such, they operate on the top level items of their
-array arguments.  
-
-## Replicate and Expand
-
-The slash glyph '/' has already been introduced as the reduce operater. However it does
-double duty as the *replicate*** function when there is an array and 
-not a function to its immediate left:
+To order the names by fastest time:
 
 ~~~
-      1 1 2 1 2 1 2 1/'Misisipi'
-Mississippi
+      Names[⍋Times]
+ Lisa  Joe  Mary  Dave  Bob 
 ~~~
 
-Each item in the right argument is replicated the number of times indicated by the correponding
-integer in the left argument. A zero in the left argument indicates zero replications, effectively
-omitting the corresponding item on the right:
+To sort the rows of the matrix M by the highest score:
 
 ~~~
-      2 0 3/7 8 9
-7 7 9 9 9
+      M[⍒M[;2];]
+ Bob   101 19
+ Dave   99 18
+ Mary   99 17
+ Lisa   87 15
+ Joe    85 16
 ~~~
 
-A negative integer in the left argument means replicating a zero or a blank for the corresponding 
-item in the right argument, depending on whether or not the right argument is character or numeric:
-
-  
-The left argument must be conform in shape to the right argument,
-though, scalar extention applies:
+The grade functions are deceptively simple. Consider the application of grade up applied to a grade up/down vecotor on the scores:
 
 ~~~
-      3/⍳3
-1 1 1 2 2 2 3 3 3
+      Scores
+101 87 85 99 99
+      ⍋Scores
+3 2 4 5 1
+      ⍋⍋Scores
+5 2 1 3 4
 ~~~
 
-The most common use of replicate is with a boolean left argument, where the 1's indicate
-items to keep, and the 0's items to discard. The boolean left argument may be thought of 
-as a selelction vector, or a mask:
+The grade of a vector is not in one to one correspondance with the original vector. In the above
+example, the 3 in ⍋Scores does not correspond or relate to the 101 in Scores. Rather it indicates
+the 3rd item in Scores (85) should be placed first when sorting in ascending order.
 
-~~~
-      1 0 1 0 1/⍳5
-1 3 5
-~~~
+When grade up is applied a second time, we get a result where each item does indeed correspond directly to each item in 
+the orginal vector. That is, 101 is the 5th lowest score, 87 is the second lowest score, 85 is the first lowest score, etc.
 
-Often the left argument is itself a function of the right argument.
-For example, to select all the values in a vector that are greater
-than 100:
+Double grade up thus *ranks* the scores.
 
-~~~
-      v←99 99 95 91 94 101 91 104 94 88
-      v>100
-0 0 0 0 0 1 0 1 0 0
-      (v>100)/v
-101 104
-~~~
-         
-When the left argument is a boolean vector, the **replicate** function is sometimes 
-called **compress**.
-
-The backslash glyph '/' has already been introduced as the scan operater. Like `/` is also 
-does double duty as a dyadic function **expand**.
 
 
 
