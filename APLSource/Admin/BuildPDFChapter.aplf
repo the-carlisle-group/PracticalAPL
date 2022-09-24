@@ -1,0 +1,11 @@
+ BuildPDFChapter←{
+     ⎕IO←0
+     sf←'c:\APLProjects\PracticalAPL\APLSource\DocSource\Chapters'
+     f←sf,'\',⍵,'.md'
+     v←⊃⎕NGET f 1
+     c←A.MD2DOM v
+     d←A.NewDocument''
+     d.Style←PrintCSS 0
+     d.Content,←BuildChapters,⊂c
+     d
+ }

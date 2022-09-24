@@ -1,0 +1,60 @@
+# Take Home APL Exercises for September 20th
+
+Given the following matrix m: 
+
+~~~
+     m←4 5⍴5 6 4 3 8 21 3 12 18 6 7 27 2 15 12 11 24 6 9 14
+     m
+ 5  6  4  3  8
+21  3 12 18  6
+ 7 27  2 15 12
+11 24  6  9 14
+~~~
+
+Write expressions that computes or returns:
+
+
+1. The total number of items in m.
+
+2. The sum of all of the items in m.
+
+3. The number of columns in m whose values are all multiples of 3.
+
+4. The number of rows and columns in m whose values are all multiples of 3.
+
+4. The sum across the rows of m.
+
+5. The sum down the columns of m without using `⌿`.
+
+4. The 3 middle columns of m. 
+
+5. The 3rd row of m.
+
+6. The number of items in m greater than 20 or less than 10.
+
+Give also the two vectors:
+
+~~~
+     v1←100 200 300 400 500
+     v2←1000 2000 3000 4000
+~~~
+
+Try adding v1 or v2 to m. What happens? Why?
+
+7. Write an expression that adds v1 to each row of m. It should return:
+
+~~~
+105 206 304 403 508
+121 203 312 418 506
+107 227 302 415 512
+111 224 306 409 514
+~~~
+
+8. Write an expression that adds v2 to each column of m. It should return:
+
+~~~
+1005 1006 1004 1003 1008
+2021 2003 2012 2018 2006
+3007 3027 3002 3015 3012
+4011 4024 4006 4009 4014
+~~~

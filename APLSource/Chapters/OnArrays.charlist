@@ -1,0 +1,13 @@
+# On Arrays
+
+An array is a rectangular collection of items arranged along 0 or more axes.
+Each item of an array is an array itself. An array may be a single number or character. These
+arrays are called simple scalars or elements. An array may be a list of zero or more items.
+These arrays are called vectors. An array
+
+An array all of whose items are elements is called a simple array.
+Otherwise the the array is a nested array.   
+     
+
+
+

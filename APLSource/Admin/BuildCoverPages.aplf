@@ -1,0 +1,19 @@
+ BuildCoverPages←{
+     ⍝ Cover page
+     c←A.New'section'
+     c.class←'cover'
+     _←c A.New'h1' 'Practical APL'
+     ⍝ Title page
+     t←A.New'section'
+     t.class←'title'
+     _←t A.New'h1' 'Practical APL'
+     _←t A.New'h2' 'Paul S. Mansour'
+     _←t A.New'h3' 'The Carlisle Group'
+     _←t A.New'h4' 'Bozeman    Scranton    Key West'
+     ⍝ Copyright Page
+     r←A.New'section'
+     r.class←'copyright'
+     _←r A.New'p' 'Copyright 2022 Paul S. Mansour'
+     ⍝
+     c t r
+ }

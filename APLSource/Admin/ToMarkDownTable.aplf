@@ -1,0 +1,5 @@
+ ToMarkDownTable←{
+  ⍝ ⍵ ←→ Matrix
+
+     '|',¨⍵
+ }

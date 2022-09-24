@@ -1,8 +1,8 @@
 # Chapter 3 - Variables and User Defined Functions
 
-> In which the glyphs `: ← { } ⍺ ⍵` are introduced
+> In which the glyphs `: ← { } ⍺ ⍵ ∇` are introduced
 > and the terms variable, assignment, user-defined function, local variable, global variable,
-> guard, error guard, workspace, system command are defined.  Multiline functions and
+> guard, error guard, recursion, workspace, system command are defined.  Multiline functions and
 > the system commands )VARS and )FNS are explained.
 
 ## Variables and Assignment

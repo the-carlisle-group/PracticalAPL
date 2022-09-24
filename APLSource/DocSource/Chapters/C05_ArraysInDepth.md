@@ -1,10 +1,9 @@
 # Chapter 5 - Arrays in Depth
 
-> In which the glyphs `≡ ¨ ⊂ ⊃ ,` are introduced and the monadic use of `↑ ↓` demonstrated. 
+> In which the glyphs `≡ ¨ ⊂ ⊃ , ⊆` are introduced and the monadic use of `↑ ↓` demonstrated. 
 > The terms simple array, nested array, juxtaposition, catenation, strand notation,
 > and depth are discussed.
 > User commands ]box and ]display are explained.
-
 
 ## Simple and Nested Arrays
 

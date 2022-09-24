@@ -1,0 +1,15 @@
+ BuildPDF←{
+     ⎕IO←0
+     sf←'c:\APLProjects\PracticalAPL\APLSource\DocSource\Chapters'
+     a←⊃(⎕NINFO⍠1)sf,'/*.*'
+     f←a/⍨'.md'∘≡¨2⊃¨⎕NPARTS a   ⍝ Should be in order NO TOC NEEDED
+                                 ⍝ Sub sections can be extracted from docs if needed
+     v←⊃¨{⎕NGET ⍵ 1}¨f           ⍝ Read all the files
+     c←f{0::⎕←⍺ ⋄ A.MD2DOM ⍵}¨v  ⍝ Convert to DOM
+     d←A.NewDocument''
+     d.Style←PrintCSS 0
+     d.Content,←BuildCoverPages''
+     d.Content,←BuildTOC c
+     d.Content,←BuildChapters c
+     d
+ }

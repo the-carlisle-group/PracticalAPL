@@ -1,0 +1,97 @@
+# Take Home APL Exercises for September 23rd
+
+Soduko is a game represented by a 9×9 matrix.
+In a solved puzzle, each row  must contain the digits from 1 to 9,
+each column must contain the digits from 1 to 9, and each of the 3 by 3 sub
+matrices (there are 9) must contain the digits from 1 to 9. 
+ 
+Let's define a blank Soduko board as follows: 
+
+~~~
+      m←9 9⍴⍳81
+      m
+ 1  2  3  4  5  6  7  8  9
+10 11 12 13 14 15 16 17 18
+19 20 21 22 23 24 25 26 27
+28 29 30 31 32 33 34 35 36
+37 38 39 40 41 42 43 44 45
+46 47 48 49 50 51 52 53 54
+55 56 57 58 59 60 61 62 63
+64 65 66 67 68 69 70 71 72
+73 74 75 76 77 78 79 80 81
+~~~
+
+The numbers here just represent the 81 (9×9) total cells, not the actual digits that would be placed
+in each cell to play the game. 
+
+The first sub-matrix may be extracted as:
+
+~~~
+      3 3↑m
+ 1  2  3
+10 11 12
+19 20 21
+~~~
+
+Using take (`↑`) and drop (`↓`), write the expressions that extract the remaining 3 by 3 sub matrices:
+
+1. Top center
+
+2. Top right
+
+3. Middle left
+
+4. Center 
+
+5. Middle right
+ 
+6. Bottom left
+
+7. Bottom center
+
+8. Bottom right
+
+
+Let `t` be a completed tic-tac-toc game:
+
+~~~
+      t←3 3⍴'XXX OOO X'
+      t
+XXX
+ OO
+O X
+~~~
+
+The blanks represent unplayed squares. (note your zeros (0) from your letter 'O's)
+
+And let i be the 3 by 3 identity matrix:
+
+~~~
+      i←(⍳3)∘.=⍳3
+      i
+1 0 0
+0 1 0
+0 0 1
+~~~
+
+Write expressions of `t` and `i` to compute:
+
+(Your answers should work for any board, not just the specific one above) 
+
+9. How many total moves were made by both players combined.
+
+10. 1 if X wins horizontally, else 0. 
+
+11. 1 if X wins vertically, else 0.
+
+12. 1 if X wins diagonally from the top left to bottom right, else 0.
+
+13. 1 if X wins diagonally from the top right to bottom left, else 0. 
+
+Finally:
+
+14. Carefully combine the above 5 expression into one single expression that returns
+a 1 if X wins, else 0.  
+ 
+
+

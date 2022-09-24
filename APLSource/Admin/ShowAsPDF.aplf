@@ -1,0 +1,10 @@
+ ShowAsPDF←{
+     ⍝ ⍵ ←→ DOM
+     h←#.Abacus.Main.DOM2HTML ⍵
+     tn←#.CAS.U.TempDir,'\',#.CAS.WSH.GetTempName'html'
+     _←(⊂h)⎕NPUT tn 0
+     pf←#.CAS.PrinceXML.ConvertHTMLToPDF tn
+     _←'hr'⎕WC'HTMLRenderer'
+     hr.URL←'file:\\',pf
+     hr
+ }

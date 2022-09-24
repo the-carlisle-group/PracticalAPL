@@ -1,0 +1,120 @@
+ PrintCSS←{
+     s←⍬
+     New←A.NewRule
+     s←New''
+
+     r←s New'body'
+     r.font_family←'Times New Roman'
+     r.font_size←'11pt'
+
+
+
+
+     ⍝ Code
+     r←s New'code'
+     r.font_family←'APL385 Unicode'
+     ⍝ r.font_size←'10pt'
+     r←s New'pre'
+     r.margin←0
+     r.whitespace←'pre'
+     r.break_inside←'avoid'
+     r.padding←0
+     r←s New'pre>code'
+     r.display←'block'
+     r.margin←0
+     r.padding←'0 .5in'
+
+
+
+
+     ⍝ Basic Page
+     r←s New'@page'
+     r.size←'letter'
+     r.margin←'.8in'
+     r.margin_inside←'1.1in'
+
+     ⍝ Facing Pages
+     r←s New'@page :left'
+     ⍝ r.margin_right←'1.5in'
+
+     r←r New'@bottom-left'
+     r.content←'counter(page)'
+
+
+
+     r←s New'@page :right'
+     ⍝ r.margin_left←'1.5in'
+
+     r2←r New'@top-right'
+     r2.content←'string(chaptertitle)'
+     r2.font_size←'10pt'
+
+     r2←r New'@bottom-right'
+     r2.content←'counter(page)'
+
+
+
+
+
+
+     ⍝ Sections
+     r←s New'section'
+     ⍝ r.page_break_before←'always'
+     r.page_break_before←'always'
+
+
+     ⍝ Table of Contents
+     r←s New'.TOC>h1'
+     r.font_weight←'bold'
+     r.font_family←'Times New Roman'
+     r.font_size←'28pt'
+     r.font_weight←'bold'
+
+     r←s New'.TOC>h2'
+     r.padding←'0'
+     r.margin←'14pt 0 0 0'
+     r.font_weight←'bold'
+     r.font_family←'Times New Roman'
+     r.font_size←'14pt'
+     r.font_weight←'bold'
+
+     r←s New'.TOC>p'
+     r.padding←'0'
+     r.margin←'0'
+     ⍝ r.font_family←'Times New Roman'
+     ⍝ r.font_size←'8pt'
+     r.padding←'3pt 0 3 pt 0'
+
+     ⍝ Chapters
+     r←s New'.chapter>h1'
+     r.string_set←'chaptertitle content()'
+     r.font_family←'Arial'
+     r.font_size←'20pt'
+     r.padding←0
+     r.margin←0
+
+     r←s New'.chapter>h2'
+     r.string_set←'subsection content()'
+     r.padding←0
+     r.margin←'.25in 0 0 0'
+     r.font_family←'Arial'
+     r.font_size←'12pt'
+
+
+   ⍝  r←s New'@page :right'
+⍝     r←r New'@top-right'
+⍝     r.content←'string(chaptertitle)'
+⍝     r.font_size←'10pt'
+
+     r←s New'.chapter>p'
+     r.text_align←'justify'
+     r.margin←'0 0 .125in 0'
+     r.padding←0
+
+
+
+
+     z←New'@media print'
+     z.Rules←s
+     z
+ }

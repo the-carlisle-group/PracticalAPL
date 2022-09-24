@@ -1,0 +1,5 @@
+ BuildChapters←{
+     s←{A.New'section'⍵}¨⍵
+     s.class←⊂'chapter'
+     s
+ }

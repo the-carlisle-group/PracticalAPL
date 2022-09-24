@@ -1,0 +1,12 @@
+ BuildTOC←{
+     ⍝ ⍵ ←→ Chapters
+     h←⎕NS¨⊃¨⍵
+     h.Tag←⊂'h2'
+     p←⎕NS¨2⊃¨⍵
+     p.Tag←⊂,'p'
+     s←A.New'section'
+     s.class←'TOC'
+     _←s A.New'h1' 'Contents'
+     s.Content,←∊h{⍺ ⍵}¨p
+     s
+ }
