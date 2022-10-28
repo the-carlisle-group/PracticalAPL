@@ -46,36 +46,60 @@ or mark the items that are greater than 7:
 APL functions work on arrays of all dimensions, so all the primitive functions we have
 learned to apply to vectors may be applied to matrices.
 
-For example, to sum across the matrix, use the `reduce` operator:
+For example, to sum across the matrix, use the `reduce`  (`/`) operator:
 
 ~~~
       +/m
 15 40 65 90
 ~~~
 
-But a matrix has two dimensions or axes. We have seen how to sum across the rows with  We can sum down the matrix using the `reduce first` (`⌿`) operator:  
+But a matrix has two dimensions or axes, so in addition to summing across, 
+we can sum down the matrix using the `reduce first` (`⌿`) operator:  
 
 ~~~
       +⌿m
 34 38 42 46 50
 ~~~
 
-Summing along the last axis is summing the columns:
+Summing along the last axis is summing the columns.
+Each column is treated as a vector then the vectors are added together:
 
- ┌──┐  ┌──┐  ┌──┐  ┌──┐  ┌──┐ 
- │ 1│  │ 2│  │ 3│  │ 4│  │ 5│ 
- │ 6│  │ 7│  │ 8│  │ 9│  │10│ 
- │11│  │12│  │13│  │14│  │15│ 
- │16│  │17│  │18│  │19│  │20│ 
- └──┘  └──┘  └──┘  └──┘  └──┘ 
+~~~
+┌──┐   ┌──┐   ┌──┐   ┌──┐   ┌──┐    ┌──┐
+│ 1│   │ 2│   │ 3│   │ 4│   │ 5│    │15│
+│ 6│ + │ 7│ + │ 8│ + │ 9│ + │10│ ←→ │40│
+│11│   │12│   │13│   │14│   │15│    │65│
+│16│   │17│   │18│   │19│   │20│    │90│
+└──┘   └──┘   └──┘   └──┘   └──┘    └──┘
+~~~
 
-                              
+Summing along the first axis is summing the rows.
+Each row is treated as a vector and then the vectors are added together: 
 
-Summing along the first axis is summing the rows:
+~~~
+┌──────────────┐     
+│ 1  2  3  4  5│     
+└──────────────┘     
+       +         
+┌──────────────┐    
+│ 6  7  8  9 10│    
+└──────────────┘    
+       +         
+┌──────────────┐
+│11 12 13 14 15│
+└──────────────┘
+       +         
+┌──────────────┐
+│16 17 18 19 20│
+└──────────────┘
+       ↑
+       ↓
+┌──────────────┐
+│34 38 42 46 50│ 
+└──────────────┘
+~~~ 
 
-
-
-
+In both cases the results are vectors.
 
 
 The structural functions  `take` (`↑`) and `drop` (`↓`) extract or remove rows and columns from a

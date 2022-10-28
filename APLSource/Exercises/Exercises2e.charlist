@@ -1,0 +1,52 @@
+# Exercises Due Tuesday October 18th.   
+
+Name_______________________________
+
+
+Write functions that compute:
+
+
+1. The sum of the N (left argument) largest numbers in a list (right argument):
+
+~~~
+      3 {...} 60 8 44 72 11 96 1 85 70 11  
+253    
+      2 {...} 7 2 9
+16
+~~~
+
+2. The number of words in a sentence. Assume one blank between each word and no leading or trailing blanks:
+
+~~~
+    {...} 'Now is the time.'
+4
+~~~
+
+Consider some grocery items (G), and their prices (P), and quantites purchased (Q): 
+
+~~~
+G←'Apples' 'Bread' 'Rice' 'Soda' 'Milk'
+P←.75 4.95 8.95 .99 4.25
+Q←12 2 1 7 3
+~~~
+
+3. Write a function that computes the total cost:
+
+~~~
+       P{...}Q
+47.53
+~~~
+
+4. Write an expression (not a function) using G P and Q to return the two largest expediture (price x quanity) items:
+
+~~~
+      ...your expression...
+ Apples Soda      
+~~~
+
+5. Write a function to compute the total spent on the 3 smallest expenditure items:
+
+~~~
+      P{...}Q
+24.88  
+~~~

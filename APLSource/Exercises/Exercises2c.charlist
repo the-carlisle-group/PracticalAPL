@@ -1,0 +1,43 @@
+# Exercises for Friday 10/7
+
+(Due Tuesday)
+
+Write functions that return:
+
+
+1. The total number of vowels in a word:
+
+~~~
+     {...}'academy'
+3
+~~~
+
+2. The total number of consonants in a word:
+
+~~~
+     {...}'academy'
+4
+~~~
+
+3. Whether or not there are any values that are perfect mutliples of 3 in a vector:
+
+~~~
+       {...}2 4 8 10
+0
+       {...}12 4 9 10
+1
+~~~
+
+4. The values in a vector that are perfect multiples of 3:
+
+~~~
+      {...}12 4 9 10
+12 9
+~~~
+
+5. The values in vector that are perfect multiples of 3 or 5:
+
+~~~
+      {...}12 4 9 10 14 15 13
+12 9 10 15
+~~~

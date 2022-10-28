@@ -1,6 +1,6 @@
 # Chapter 1 - Arrays and Functions
 
-> In which the glyphs `+ - × ÷ ⌈ ⌊ ⍳ ⍴ / \\` are introduced, and the terms array, function, operator,
+> In which the glyphs `+ - × ÷ * ⌈ ⌊ | ⍳ ⍴ / \\` are introduced, and the terms array, function, operator,
 > scalar, vector, matrix, scalar function, scalar extention, glyph, conforming, non-conforming,
 > right argument, left argument, monadic, dyadic, right operand, left operand,
 > expression, order of operations, high minus, are informally defined. 

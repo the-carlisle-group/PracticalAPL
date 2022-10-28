@@ -1,0 +1,58 @@
+# Exercises for Tuesday, October 11th.
+
+Due Friday October 14th.   
+
+Name_______________________________
+
+Write functions that return:
+
+1. Whether or not a word starts and ends with the same letter.
+
+~~~
+        {...} 'repair'
+   1
+        {...} 'work'
+
+   0
+~~~
+
+2. The number of times certain letters appear in a word:
+
+~~~
+        'an'{...}'banana'
+3 2
+        'aeiou'{...}'delimiting'
+0 1 3 0 0
+~~~
+
+3. The maximum occurance of any one letter:
+
+~~~
+          {...} 'mississippi'
+4
+
+          {...} 'weekend'
+3
+~~~
+
+Given a set of monthly debit card expenditures E from January to December for teenager Lucy,
+who has an annual limit of L dollars set by her parents: 
+
+~~~
+        E←20 30 10 15 7 19 11 22 44 15 22 17 
+        L←150
+~~~
+
+4. How many months was she over her limit?
+
+~~~
+      L{...}E 
+4
+~~~
+
+5. In what number month (1 to 12) did she go over her limit?
+
+~~~
+      L{...}E
+9
+~~~

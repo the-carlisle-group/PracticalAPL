@@ -1,0 +1,46 @@
+# Exercises Due Tuesday October 18th.   
+
+Name_______________________________
+
+Write a function that: 
+
+1.  Generates the integers between ⍺ and ⍵ inclusive:
+
+~~~
+      10{...}15
+10 11 12 13 14 15
+~~~
+
+2. Converts a vector of hours, minutes and seconds to seconds:
+
+~~~
+      {...}3 59 12
+14352
+~~~
+
+3. Replaces all the non-blank characters in a vector with the letter 'x' (Hint: creative use of bracket indexing): 
+
+~~~
+      {...}'This has been redacted'
+xxxx xxx xxxx xxxxxxxx
+~~~
+
+4. Sums the first N terms of the infinite series 1/2, 1/4, 1/8, 1/16, 1/32 ...
+That is, 1 divided by 2 raised to the Nth power, where N is the Nth term of the series.
+
+~~~
+      {...}3
+0.875
+      {...}10
+0.9990234375
+      {...}100
+1
+~~~
+
+Use the Language Bar or help in your APL Session and:
+
+5a. Look up the operator `dot` (`.`). Solve problem #2 using this dyadic operator.     
+
+5b. Look up the function `decode` (`⊥`). Solve problem #2 yet again using only this glyph.
+
+
